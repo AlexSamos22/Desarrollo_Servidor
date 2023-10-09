@@ -10,7 +10,6 @@
         setcookie('visitas', $visitas, time() + 3600 * 24);
         echo "Bienvenido por $visitas vez";
     }
-
     echo '<br><a href="eliminarCookie.php">Eliminar Cookie</a>';
 ?>
 ?>

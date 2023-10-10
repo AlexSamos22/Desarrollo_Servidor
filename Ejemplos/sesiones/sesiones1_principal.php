@@ -1,7 +1,7 @@
 <?php
     session_start();
     if (!isset($_SESSION['usuario'])) {
-        header("Location: sesiones1_login.php?rederigido=true");
+        header("Location: sesiones1_login.php?redirigido=true");
     }
 ?>
 

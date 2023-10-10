@@ -12,4 +12,3 @@
     }
     echo '<br><a href="eliminarCookie.php">Eliminar Cookie</a>';
 ?>
-?>

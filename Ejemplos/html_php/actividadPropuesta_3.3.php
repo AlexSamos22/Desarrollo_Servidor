@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
-        
+    
         <form action="idioma.php" method="post">
             <select name = "idioma">
                 <option value="esp">Español</option>

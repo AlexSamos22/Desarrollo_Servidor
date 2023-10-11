@@ -1,6 +1,11 @@
 <?php
-    include "librerias/operaciones.php";
+    include "/xampp/htdocs/Entorno_servidor/librerias/operaciones.php";
 
+    if($_SERVER['REQUEST_METHOD'] == "POST"){
+        if (is_numeric($_POST['num1']) and is_numeric($_POST['num2'])) {
+            echo "La suma de los numeros ". $_POST['num1']. " y ". $_POST['num2']. "  es: ". $_POST['num1'] + $_POST['num2'];
+        }
+    }
     
 ?>
 

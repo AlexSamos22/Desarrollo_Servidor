@@ -1,12 +1,14 @@
 <?php
-    include "/xampp/htdocs/Entorno_servidor/librerias/operaciones.php";
 
     if($_SERVER['REQUEST_METHOD'] == "POST"){
-        if (is_numeric($_POST['num1']) and is_numeric($_POST['num2'])) {
-            echo "La suma de los numeros ". $_POST['num1']. " y ". $_POST['num2']. "  es: ". $_POST['num1'] + $_POST['num2'];
+        if (isset($_POST['num1']) and isset($_POST['num2'])) {
+            if ($_POST['num1'] > $_POST['num2']) {
+            echo "El numero". $_POST['num1'] . " es mayor que el ". $_POST['num2'];
+            }else{
+                echo "El numero". $_POST['num2'] . " es mayor que el ". $_POST['num1'];
+            }
         }
     }
-    
 ?>
 
 <!DOCTYPE html>

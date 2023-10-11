@@ -1,10 +1,13 @@
 <?php
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
-        if (isset($_POST['num']) and !empty($_POST['num'])) {
-            $valorASCII = chr($_POST['num']); 
-            echo "El valor ASCII del numero ". $_POST['num'] . " es:  $valorASCII";
+        if (isset($_POST['frase']) and !empty($_POST['frase'])) {
+          $fraseSinEspacios = str_replace( " ", "", $_POST['frase']);
+
+          echo "Frase sin espacios: ";
+          echo $fraseSinEspacios;
         }
     }
+    
 ?>
 
 <!DOCTYPE html>
@@ -18,10 +21,11 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
+
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"
         method="post">
-            <label for="num">Introduce un numero</label>
-            <input name="num" id="num" type="number">
+            <label for="frase">Introduce una frase</label>
+            <input name="frase" id="frase" type="text">
             <input type="submit">
         </form>
 

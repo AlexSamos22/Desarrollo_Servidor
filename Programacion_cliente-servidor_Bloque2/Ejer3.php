@@ -1,21 +1,29 @@
 <?php
     if($_SERVER['REQUEST_METHOD']=="POST"){
-        if (isset($_POST['tiempo'])) {
-            $tiempo = $_POST['tiempo'];
-            $precioTotal = 0.10;
-            
-            if($tiempo < 3){
-                echo "El precio de su llamada es 0.10 centimos<br>";
-            }else{
-                for ($i=1; $i <= $tiempo - 3 ; $i++) { 
-                    $precioTotal += 0.05;
+        if (isset($_POST['fecha1']) and isset($_POST['fecha2'])) {
+           $fechaActual = DateTime::createFromFormat('Y-m-d H:i:s', $_POST['fecha1']);
+           $fechaPartida = DateTime::createFromFormat('Y-m-d H:i:s', $_POST['fecha2']);
+
+           if (!$fechaActual || !$fechaPartida) {
+                echo "Formato de fecha invalido. Usa YYYY-MM-DD HH:MM:SS<BR>";
+                echo "<a href='Ejer3.php'>Volver</a>";
+           }else{
+                if ($fechaActual > $fechaPartida) {
+                    echo "La fecha actual no puede ser mayor a la de paryida <br>";
+                    echo "<a href='Ejer3.php'>Volver</a>";
+                }else{
+                    $horasSalida = $fechaActual->diff($fechaPartida);
+                    $dias = $horasSalida->d;
+                    $horas = $dias + 24 + $horasSalida->h;
+                    $minutos = $horas * 60 + $horasSalida->i;
+                    echo "Para la salida de su vuelo quedan $horas horas y $minutos minutos <br>";
+                    echo "<a href='Ejer3.php'>Volver</a>";
                 }
-                echo "El precio de su llamada es: $precioTotal <br>";
-            }
-            echo "<a href='Ejer2.php'>Volver</a>";
+           }
+          
 
         }else{
-            echo "<a href='Ejer2.php'>Volver</a>";
+            echo "<a href='Ejer3.php'>Volver</a>";
         }
     }else{
 ?>
@@ -32,8 +40,12 @@
         <body>
             <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>"
             method="post">
-                <label for="horaSegundos">¿Cuanto tiempo a durado la llamada?</label>
-                <input id="tiempo" name="tiempo" type="datetime" required>
+                <label for="fecha1">Fecha y hora actual</label>
+                <input id="fecha1" name="fecha1" type="text" required>
+                <br>
+                <label for="fecha2">Fecha y hora de salida</label>
+                <input id="fecha2" name="fecha2" type="text" required>
+                <br>
                 <input type="submit">
             </form>
         </body>

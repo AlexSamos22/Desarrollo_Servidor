@@ -20,8 +20,6 @@
                     echo "<a href='Ejer3.php'>Volver</a>";
                 }
            }
-          
-
         }else{
             echo "<a href='Ejer3.php'>Volver</a>";
         }

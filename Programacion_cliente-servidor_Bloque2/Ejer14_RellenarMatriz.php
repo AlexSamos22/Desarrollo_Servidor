@@ -12,23 +12,21 @@
 
         <?php 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            if (isset($_POST['columna']) and isset($_POST['filas'])) {
-                $filas = $_POST['filas'];
-                $columnas = $_POST['columna'];
-        echo "<form method='post' action='Ejer11_Generar_tabla_final.php'>"; 
+            if (isset($_POST['n'])) {
+                $n = $_POST['n'];
+         echo "<form method='post' action='Ejer14_VerificarEsquinas.php'>"; 
          echo"<table border='1'>";
                 
-                for ($i = 0; $i < $filas; $i++) {
+                for ($i = 0; $i < $n; $i++) {
                     echo "<tr>";
-                    for ($j = 0; $j < $columnas; $j++) {
+                    for ($j = 0; $j < $n; $j++) {
                         echo "<td><input type='number' name='dato[$i][$j]'></td>";
                     }
                     echo "</tr>";
                 }
                 
           echo  "</table>";
-          echo "<input  type='hidden' value='$filas' name='filas'>";
-          echo "<input  type='hidden' value='$columnas' name='columnas'>";
+          echo "<input  type='hidden' value='$n' name='n'>";
           echo " <input type='submit' value='Enviar datos'>" ;
           echo" </form>";
     ?>

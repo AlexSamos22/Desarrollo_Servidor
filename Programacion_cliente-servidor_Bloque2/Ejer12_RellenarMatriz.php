@@ -15,7 +15,7 @@
             if (isset($_POST['columna']) and isset($_POST['filas'])) {
                 $filas = $_POST['filas'];
                 $columnas = $_POST['columna'];
-        echo "<form method='post' action='Ejer11_Generar_tabla_final.php'>"; 
+         echo "<form method='post' action='Ejer12_SumaDatos.php'>"; 
          echo"<table border='1'>";
                 
                 for ($i = 0; $i < $filas; $i++) {

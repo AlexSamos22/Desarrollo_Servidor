@@ -12,7 +12,7 @@
 
         <?php 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            if (isset($_POST['n'])) {
+            if (isset($_POST['n']) && $_POST['n']%2 != 0) {
                 $n = $_POST['n'];
          echo "<form method='post' action='Ejer14_VerificarEsquinas.php'>"; 
          echo"<table border='1'>";
@@ -35,6 +35,9 @@
     </html>
 
 <?php
+    }else{
+        echo "El numero debe ser impar<br>";
+        echo "<a href='Ejer14_PedirMatriz.html'>Volver</a>";
     }
 }
         

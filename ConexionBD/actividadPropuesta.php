@@ -31,7 +31,6 @@
                     $resul = $bd->query($upd);
                     if (!$resul) {
                         echo "Error: ". print_r($bd->errorInfo());
-                        
                     }else{
                     echo "Actualizacion realizada con exito, filas actualizadas: ". $resul->rowCount();
                     };

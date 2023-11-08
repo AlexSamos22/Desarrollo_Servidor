@@ -5,7 +5,7 @@ si no existe, debería darlo de alta y si existiese debería modificar la bbdd.
 
 Select: SELECT nombre, clave, rol FROM usuarios'
 Delete: delete from usuarios where nombre = 'Luisa'
-Update: update usuarios set rol = 0 where rol = 1 
+Update: update usuarios set rol = 0, clave = 1 where rol = 1 
 Insert: insert into usuarios(nombre, clave, rol)
         values('Alberto', '3333', '1')"
 */
@@ -20,46 +20,28 @@ if (isset($_POST['user']) and isset($_POST['cont']) and isset($_POST['rol'])) {
             $cont = $_POST['cont'];
             $rol = $_POST['rol'];
     
-            $usuarios = 'SELECT nombre, clave, rol FROM usuarios';
-            $resul = $db->query($usuarios);
-    
-            $accion = false;
-            $crear = false;
-    
-            foreach ($resul as $row) {
-                if ($user == $row['nombre']) {
-                    if ($cont == $row['clave'] and $rol == $row['rol']) {
-                        $accion = true;
-                    }else{
-                        $crear = true;
-                    }
-                }
-            }
-    
-            if (!$accion) {
-                if ($crear) {
-                    echo "El usuario existe, pero hay campos distintos y se actualizaran <br>";
-                    $upd = "update usuarios set rol='$rol', clave = '$cont' where nombre='$user'";
-                    $resul = $db->query($upd);
-                    if (!$resul) {
-                        echo "Error: ". print_r($bd->errorInfo());
-                    }else{
-                    echo "Actualizacion realizada con exito, filas actualizadas: ". $resul->rowCount();
-                    };
+            $comprobarExistencia = "SELECT nombre, clave, rol FROM usuarios WHERE nombre = '$user'";
+            $existe = $db->query($comprobarExistencia);
+
+            if ($existe->rowCount() == 1) {
+                echo "El usuario existe <br>";
+                echo "Comprobando si hay que actualizar algun campo<br>";
+                $comprobarAct = "SELECT nombre, clave, rol FROM usuarios WHERE nombre = '$user' and clave = '$cont' and rol = '$rol'";
+                $act = $db->query($comprobarAct);
+                if ($act->rowCount() == 1) {
+                    echo "Todos los campos son iguales no se actualizara nada";
                 }else{
-                    echo "El usuario no existe, se creara<br>";
-                    $ins = "insert into usuarios(nombre, clave, rol)
-                            values ('$user', '$cont', '$rol')";
-                    $resul = $db->query($ins);
-                    if (!$resul) {
-                        echo "Error: ". print_r($bd->errorInfo());
-                    }else{
-                        echo "Inserccion realizada con exito, filas insertadas: ". $resul->rowCount();
-                    }    
+                    echo "Hay campos distintos se actualizaran<br>";
+                    $upd = "UPDATE usuarios set clave = '$cont', rol = '$rol' WHERE nombre = '$user'";
+                    $result = $db->query($upd);
+                    echo "Se han actualizado ". $result->rowCount(). " filas";
                 }
             }else{
-                echo "Todos los campos son iguales, no se hara ninguna accion";
-            }
+                echo "El usuario no existe se creara<br>";
+                $ins = "insert into usuarios(nombre, clave, rol) values('$user', '$cont', '$rol')";
+                $result = $db->query($ins);
+                echo "Se han insertado ". $result->rowCount(). " filas";
+            } 
     } catch (\Throwable $th) {}
 }
    

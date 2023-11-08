@@ -1,12 +1,12 @@
 <?php
-if (isset($_COOKIE['color'])) {
-    echo "El color elegido es: ". $_COOKIE['color'];
+if(isset($_COOKIE['idioma']) and $_COOKIE['idioma'] == "Esp"){
+    echo "Pagina en español";
+    echo "Seleccione idioma";
 }else{
-    echo "Color por defecto: rojo";
+    echo "English page";
+    echo "Select lenguage";
 }
-
 ?>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,13 +18,12 @@ if (isset($_COOKIE['color'])) {
         <link rel="stylesheet" href="">
     </head>
     <body>
-        <form action="cookies.php" method="post">
-            <input name="valor" type="text">
+        <form action="php.php" method="post">
+            <select name = "idioma">
+                <option value="Esp">Español</option>
+                <option value="Ing">Ingles</option>
+            </select>
             <input type="submit">
-        </form>
-        <form action="borrar_cookie.php" method="post">
-            <input type="submit" value="Borrar cookie">
-            <input type="hidden" value="borrar" name="eliminar">
         </form>
     </body>
 </html>

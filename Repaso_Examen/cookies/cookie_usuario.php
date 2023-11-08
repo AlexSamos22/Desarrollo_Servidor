@@ -1,8 +1,9 @@
 <?php
-if (isset($_COOKIE['color'])) {
-    echo "El color elegido es: ". $_COOKIE['color'];
+if (isset($_COOKIE['name']) and isset($_COOKIE['username'])) {
+    echo "Hola de nuevo: ". $_COOKIE['name']. "<br>";
+    echo "Su nombre de usuario es: ". $_COOKIE['username'];
 }else{
-    echo "Color por defecto: rojo";
+    echo "Bienvenido por primera vez!!!!";
 }
 
 ?>
@@ -18,13 +19,10 @@ if (isset($_COOKIE['color'])) {
         <link rel="stylesheet" href="">
     </head>
     <body>
-        <form action="cookies.php" method="post">
-            <input name="valor" type="text">
+        <form action="cookie_usuarioSet.php" method="post">
+            <input name="name" type="text">
+            <input name="username" type="text">
             <input type="submit">
-        </form>
-        <form action="borrar_cookie.php" method="post">
-            <input type="submit" value="Borrar cookie">
-            <input type="hidden" value="borrar" name="eliminar">
         </form>
     </body>
 </html>

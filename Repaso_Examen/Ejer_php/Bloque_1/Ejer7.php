@@ -9,15 +9,20 @@ a. La primera cifra del número coincide con la primera cifra del número premia
 b. La última cifra del número coincide con la última cifra del número premiado
 */
 
-$numero = "12346";
-$numeroPremiado = "16786";
+$premio = "10001";
+$boleto = "10201";
 
-if ($numero == $numeroPremiado) {
-    echo "Ganador";
-}else if($numero[0] == $numeroPremiado[0] and $numero[4] == $numeroPremiado[4]){
-    echo "Tiene reintegro";
+if ($premio == $boleto) {
+    echo "premiado";
 }else{
-    echo "No premiado";
+    $primeraCifraNumero = $numero[0];
+    $ultimaCifraNumero = $numero[strlen($numero) - 1];
+    $primeraCifraPremiado = $numeroPremiado[0];
+    $ultimaCifraPremiado = $numeroPremiado[strlen($numeroPremiado) - 1];
+    if ($primeraCifraNumero === $primeraCifraPremiado && $ultimaCifraNumero === $ultimaCifraPremiado) {
+        echo "¡Tienes reintegro!";
+    } else {
+        echo "No tienes reintegro.";
+    }
 }
-
 ?>

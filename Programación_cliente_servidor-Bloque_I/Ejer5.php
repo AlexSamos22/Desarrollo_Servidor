@@ -3,7 +3,7 @@
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if (isset($_POST['num']) and !empty($_POST['num'])) {
             if (is_numeric($_POST['num'])) {
-                 $importeIVA = $_POST['num'] * (IVA / 100) ;
+                $importeIVA = $_POST['num'] * (IVA / 100) ;
                 $precioConIVA = $_POST['num'] + $importeIVA; 
                 echo "El precio: ". $_POST['num'] . " con un IVA del: ". IVA. "es: $precioConIVA <br>" ;
                 echo "<a href='Ejer5.php'> Volver </a>";

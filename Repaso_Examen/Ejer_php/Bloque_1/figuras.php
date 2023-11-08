@@ -12,7 +12,7 @@ for ($i= 1; $i <= 6; $i++) {
 
 for ($i= 1; $i <= 6; $i++) { 
     for ($j=1; $j <= 6 - $i ; $j++) { 
-        $triangulo.= "\t";
+        $triangulo.= "&nbsp";
     }
     for ($k=1; $k <= $i * 2 - 1 ; $k++) { 
      $triangulo.= "ç";

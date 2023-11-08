@@ -35,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         }
         
         ?>
-
     </table>
     <a href='Ejer7.php'>Volver</a>";
 </body>

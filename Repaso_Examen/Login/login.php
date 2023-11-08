@@ -4,7 +4,7 @@
             $usu['nombre'] = $nombre;
             $usu['cod'] = $clave;
             return $usu;
-        }else if ($nombre == "Admin" and $clave == "123456") {
+        }else if ($nombre == "admin" and $clave == "123456") {
             $usu['nombre'] = $nombre;
             $usu['cod'] = $clave;
             return $usu;
@@ -14,7 +14,7 @@
     }
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
-        $usu = comprobar_sesion($_POST['usuario'], $_POST['clave']);
+        $usu = comprobar_usuario($_POST['usuario'], $_POST['clave']);
         if ($usu == FALSE) {
             $err = true;
         }else{

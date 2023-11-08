@@ -2,30 +2,34 @@
 /*
 Escribe un fichero que reciba  el código de un usuario y muestre por  pantalla todos sus datos.
 */
-$cc = 'mysql:dbname=empresa;host=127.0.0.1';
-$usuario = 'root' ;
-$clave = "";
+if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['cod'])) {
+    $codUsuario = $_POST['cod'];
+    $cc = "mysql:dbname=empresa;host=127.0.0.1";
+    $user = "root";
+    $clave= "";
+    try {
+        $db = new PDO($cc, $user, $clave);
+        $consulta = "SELECT codigo, nombre, clave, rol FROM usuarios WHERE codigo = '$codUsuario'";
+        $usuarios = $db->query($consulta);
 
-try {
-    $db = new PDO($cc, $usuario, $clave);
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
-        if (isset($_POST['cod'])) {
-            $codigo = $_POST['cod'];
-            $consulta = "SELECT codigo, nombre, clave, rol FROM usuarios";
-            $usuarios = $db->query($consulta);
-            
-            foreach ($usuarios as $filas) {
-                if ($codigo == $filas['codigo']){
-                    echo "Nombre del usuario: ". $filas['nombre']. "<br>";
-                    echo "Clave del usuario: ". $filas['clave']. "<br>";
-                    echo "Rol del usuario: ". $filas['rol'];
-                }
+        foreach ($usuarios as $filas) {
+            if ($codUsuario == $filas['codigo']) {
+                echo "Usuario encontrado, sus datos son: <br>";
+                echo "Codigo ". $filas['codigo']. "<br>";
+                echo "Nombre ". $filas['nombre']. "<br>";
+                echo "Clave ". $filas['clave']. "<br>";
+                echo "rol". $filas['rol']. "<br>";
             }
         }
+
+        if ($usuarios->rowCount() == 0) {
+            $err = true;
+        }
+    } catch (PDOException $th) {
+        echo $th->getMessage();
     }
-} catch (PDOException $e) {
-    echo $e->getMessage();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -39,14 +43,17 @@ try {
         <link rel="stylesheet" href="">
     </head>
     <body>
-        
+        <?php
+        if (isset($err) and $err == true) {
+            echo "<p>Revise el codigo del usuario</p>";
+        }
+        ?>
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>"
         method="post">
         <label for="cod">Introduce el codigo del usuario</label>
         <input id="cod" name="cod" type="text">
         <input type="submit">
         </form>
-        
     </body>
 </html>
 

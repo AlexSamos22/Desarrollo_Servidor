@@ -8,7 +8,7 @@
             "name": "Launch Chrome",
             "request": "launch",
             "type": "chrome",
-            "url": "http://localhost/Entorno_servidor/Programacion_cliente-servidor_Bloque2/Ejer5.php",
+            "url": "http://localhost/Entorno_servidor/Examen/Ejer2.php",
             "webRoot": "${workspaceFolder}"
         },
         {

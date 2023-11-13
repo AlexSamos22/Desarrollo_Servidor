@@ -31,8 +31,8 @@
 			$des=$producto['Descripcion'];
 			$peso=$producto['Peso'];
 			$unidades=$_SESSION['carrito'][$cod];
-			
-			echo "<tr><td>$nom</td><td>$des</td><td>$peso</td><td>$unidades</td>";
+			$pesoTotal = $peso * $unidades;
+			echo "<tr><td>$nom</td><td>$des</td><td>$pesoTotal</td><td>$unidades</td>";
 		}
 		echo "</table>";
 

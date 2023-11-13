@@ -61,7 +61,7 @@ function cargar_categoria($codCat){
 function cargar_productos_categoria($codCat){
 	$res = leer_config(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
 	$bd = new PDO($res[0], $res[1], $res[2]);	
-	$sql = "select * from productos where categoria  = $codCat";	
+	$sql = "select * from productos where categoria  = $codCat and Stock > 0";	
 	$resul = $bd->query($sql);	
 	if (!$resul) {
 		return FALSE;

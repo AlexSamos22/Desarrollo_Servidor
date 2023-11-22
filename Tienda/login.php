@@ -8,10 +8,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$usu = comprobar_usuario($_POST['usuario'], $_POST['clave']);
 	if($usu===false){
 		$err = true;
-		$usuario = $_POST['usuario'];
 	}else{
 		session_start();
-		// $usu tiene campos correo y codRes, correo 
+		// $usu tiene campos correo y contraseña
 		$_SESSION['usuario'] = $usu;
 		$_SESSION['carrito'] = [];
 		header("Location: categorias.php");

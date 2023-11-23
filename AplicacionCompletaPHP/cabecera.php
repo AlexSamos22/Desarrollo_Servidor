@@ -1,13 +1,22 @@
 
     <header>
     Usuario: <?php 
-    if (isset($_SESSION['usuario'])){
-        echo $_SESSION['usuario'][0]; echo "<br>";
-    } else if(isset($_SESSION['admin'])){
-        echo $_SESSION['admin'][0]; echo "<br>";
+  if (isset($_SESSION['usuario'])) {
+    echo $_SESSION['usuario'][0] . "<br>";
+    } 
+    if (isset($_SESSION['admin'])) {
+        echo $_SESSION['admin'][0] . "<br>";
     }
     ?>
-    <a href="categorias.php">Home</a>
+
+    <?php
+        if (isset($_SESSION['usuario']) and $_SESSION['usuario'][2] == false) {
+            echo "<a href='listaCategorias.php'>Home</a>";
+        }else{
+            echo "<a href='panelControl.php'>Home</a>";
+        }
+    ?>
+    
     <?php
         if (isset($_SESSION['usuario']) and $_SESSION['usuario'][2] == false) {
            echo "<a href='carrito.php'>Ver carrito</a>"; 

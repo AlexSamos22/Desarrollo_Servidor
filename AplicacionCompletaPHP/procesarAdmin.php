@@ -8,7 +8,9 @@ $accion = $_POST["accion"];
 
 if ($accion == "modificar") {
     echo "<h2>Modificar administrador</h2>";
-    echo "<form method='POST' action='modificarAdmin.php'>";
+    echo "<form method='POST' action='modAdmin.php'>";
+        echo "<label for='cod'>Codigo</label>";
+        echo "<input id='cod' name='cod' type='number'>";
         echo "<label for='nombre'>Nombre</label>";
         echo "<input id='nombre' name='nombre' type='text'>";
         echo "<label for='apellidos'>Apellidos</label>";

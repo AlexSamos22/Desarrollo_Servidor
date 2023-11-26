@@ -1,4 +1,3 @@
-
     <header>
     Usuario: <?php 
   if (isset($_SESSION['usuario'])) {

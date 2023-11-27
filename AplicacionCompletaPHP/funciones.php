@@ -25,7 +25,7 @@
         $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
 	    $bd = new PDO($res[0], $res[1], $res[2]);
 
-        $user = "SELECT correo, contraseña FROM cliente";
+        $user = "SELECT ID_Cliente, correo, contraseña FROM cliente";
         $admin = "SELECT correo, contraseña FROM administrador";
        
         $resul1 = $bd->query($admin);
@@ -36,6 +36,7 @@
             $arr [] = $fila['correo'];
             $arr [] = $fila['contraseña'];
             $arr [] = false;
+            $arr [] = $fila['ID_Cliente'];
             $encontrado = true;
            }
         }
@@ -75,6 +76,86 @@
         return $resul;
     }
 
+    function cargar_categoria($id_Cat){
+        $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+        $bd = new PDO($res[0], $res[1], $res[2]);
+        $ins = "select nombre from categoria where ID_Cat = $id_Cat";
+        $resul = $bd->query($ins);	
+        if (!$resul) {
+            return FALSE;
+        }
+        if ($resul->rowCount() === 0) {    
+            return FALSE;
+        }	
+
+        return $resul->fetch();	
+    }
+
+    function productos_categoria($id_Cat){
+        $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+        $bd = new PDO($res[0], $res[1], $res[2]);	
+        $sql = "select * from producto where  ID_Cat = $id_Cat and Stock > 0";	
+        $resul = $bd->query($sql);	
+        if (!$resul) {
+            return FALSE;
+        }
+        if ($resul->rowCount() === 0) {    
+            return FALSE;
+        }	
+
+        return $resul;			
+    }
+
+    function cargar_productos($codigosProductos){
+        $res = leer_config(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+        $bd = new PDO($res[0], $res[1], $res[2]);
+        $texto_in = implode(",", $codigosProductos);
+        if($texto_in==NULL) return FALSE;
+        $ins = "select ID_Producto, nombre from producto where codProd in($texto_in)";
+        $resul = $bd->query($ins);	
+        if (!$resul) {
+            return FALSE;
+        }
+        return $resul;	
+    }
+
+    function insertar_pedido($carrito, $codCliente){
+        $res = leer_config(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+        $bd = new PDO($res[0], $res[1], $res[2]);
+        $bd->beginTransaction();
+        $fechaRecibido  = date("d-m-Y");
+        $fechaEnviado =	date("d-m-Y", strtotime($fechaRecibido . "+5 days"));
+
+        $insPedido = "  INSERT INTO pedido (Fecha_Recivido, Fecha_Enviado, Cliente) values ('$fechaRecibido', '$fechaEnviado','$codCliente' )";
+
+        $result = $bd ->query($insPedido);
+        if (!$result) {
+            return FALSE;
+        }
+
+        $idPedido = $bd->lastInsertId();
+
+        foreach($carrito as $codProd=>$unidades){
+            $insIcnluye = "insert into incluye(ID_Pedido, ID_Producto) 
+                        values('$idPedido', '$codProd')";
+
+            $resul = $bd->query($insIcnluye);
+       
+   
+            $updProductos = "update producto set stock=stock-$unidades
+                            where ID_Producto=$codProd";
+   
+            $resul1 = $bd->query($updProductos);
+   
+           if (!$resul || !$resul1) {
+               $bd->rollback();
+               return FALSE;
+           }
+       }
+       $bd->commit();
+       return $idPedido;
+
+    }
 
     function comprobar_sesion(){
         session_start();

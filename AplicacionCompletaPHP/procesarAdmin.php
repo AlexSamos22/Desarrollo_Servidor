@@ -22,6 +22,7 @@ if ($accion == "modificar") {
         echo "<br>";
         echo "<input type='submit' value='Modificar'>";
     echo "</form>";
+    echo "<a href='modUsuarios.php'>Volver</a>";
 } elseif ($accion == "eliminar") {
     echo "<h2>Eliminar administrador</h2>";
     echo "<form method='POST' action='eliminarAdmin.php'>";
@@ -30,6 +31,7 @@ if ($accion == "modificar") {
         echo "<br>";
         echo "<input type='submit' value='Eliminar'>";
     echo "</form>";
+    echo "<a href='modUsuarios.php'>Volver</a>";
 } elseif ($accion == "añadir") {
     echo "<h2>Añadir administrador</h2>";
     echo "<form method='POST' action='añadirAdmin.php'>";
@@ -44,6 +46,7 @@ if ($accion == "modificar") {
         echo "<br>";
         echo "<input type='submit' value='Añadir'>";
     echo "</form>";
+    echo "<a href='modUsuarios.php'>Volver</a>";
 }
 }
 ?>

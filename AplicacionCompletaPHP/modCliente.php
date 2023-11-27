@@ -18,16 +18,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     try {
             $db = new PDO($res[0], $res[1], $res[2]);
 
-            $comprobarExistencia = "SELECT codCliente, nombre, apellidos, correo, cont FROM cliente where codCliente = '$codigo'";
+            $comprobarExistencia = "SELECT ID_Cliente, nombre, apellidos, correo, contraseña FROM cliente where ID_Cliente = '$codigo'";
             $existe = $db->query($comprobarExistencia);
 
             foreach ($existe as $row) {
                 if ($nombre === $row['nombre'] and $apellidos === $row['apellidos'] and $correo === $row['correo'] and password_verify($cont, $row['contraseña'])) {
                     echo "Ningun dato se actualizara todos los datos son iguales";
                 }else{
-                    echo "Hay campos distintos se actualizaran";
+                    echo "Hay campos distintos se actualizaran....<br>";
                     $contrasenaCifrada = password_hash($cont, PASSWORD_DEFAULT);
-                    $upd = "UPDATE cliente set nombre = '$nombre', apellidos = '$apellidos', correo = '$correo', cont = '$contrasenaCifrada'  WHERE codAdmin = '$codigo'";
+                    $upd = "UPDATE cliente set nombre = '$nombre', apellidos = '$apellidos', correo = '$correo', contraseña = '$contrasenaCifrada'  WHERE ID_Cliente = '$codigo'";
 
                     $result = $db->query($upd);
 
@@ -36,6 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     }else{
                         echo "No se puedo actualizar ha ocurrido un error";
                     }
+
+                    
                 }
             }
     } catch (PDOException $th) {

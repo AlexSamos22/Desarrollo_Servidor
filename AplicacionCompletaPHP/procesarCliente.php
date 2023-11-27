@@ -23,6 +23,7 @@ if ($accion == "modificar") {
         echo "<br>";
         echo "<input type='submit' value='Modificar'>";
     echo "</form>";
+    echo "<a href='modUsuarios.php'>Volver</a>";
 
 } elseif ($accion == "eliminar") {
     echo "<h2>Eliminar cliente</h2>";
@@ -32,6 +33,7 @@ if ($accion == "modificar") {
         echo "<br>";
         echo "<input type='submit' value='Eliminar'>";
     echo "</form>";
+    echo "<a href='modUsuarios.php'>Volver</a>";
 }
 }
 ?>

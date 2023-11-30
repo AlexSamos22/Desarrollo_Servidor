@@ -2,12 +2,12 @@
 include "funciones.php";
 comprobar_sesion();
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $nombre = $_POST['nombre'];
+    $cod = $_POST['cod'];
     $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
     $bd = new PDO($res[0], $res[1], $res[2]);
 
     
-    $eliminacion = "DELETE from producto where nombre = '$nombre'";
+    $eliminacion = "DELETE from producto where ID_Producto = '$cod'";
 
     $result = $bd->query($eliminacion);
 

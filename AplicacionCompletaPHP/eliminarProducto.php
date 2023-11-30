@@ -8,16 +8,31 @@
         $cat = (int) $_POST['cat'];
 
        $productos = eliminarProducto($cat);
-
-       echo "Los productos que puedes eliminar de la categoria $cat son: <br>";
-
-       foreach ($productos as $producto) {
-            echo $producto['nombre']. "<br>";
+       echo "<h2>Info Productos</h2><br>";
+       echo "<table border='1'>";
+       echo "<tr>";
+       echo "<th>Codigo</th>";
+       echo "<th>Nombre</th>";
+       echo "<th>Stock</th>";
+       echo "<th>Precio</th>";
+       echo "<th>Categoria</th>";
+       echo "</tr>";
+   
+       foreach ($productos as $row) {
+           echo "<tr>";
+           echo "<td>" . $row['ID_Producto'] . "</td>";
+           echo "<td>" . $row['Nombre'] . "</td>";
+           echo "<td>" . $row['Stock'] . "</td>";
+           echo "<td>" . $row['Precio'] . "</td>";
+           echo "<td>" . $row['ID_Cat'] . "</td>";
+           echo "</tr>";
        }
+   
+       echo "</table>";
 
        echo "<form method='POST' action='procesarEliminacionProducto.php'>";
-        echo "<label for='nombre'>Nombre del Producto</label>";
-        echo "<input id='nombre' name='nombre' type='text'>";
+        echo "<label for='cod'>Codigo del producto</label>";
+        echo "<input id='cod' name='cod' type='number'>";
         echo "<input type='submit' value='Eliminar'>";
     echo "</form>";
 

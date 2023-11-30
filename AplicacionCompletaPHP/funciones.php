@@ -212,9 +212,37 @@
         $bd = new PDO($res[0], $res[1], $res[2]);
 
         //Sacar productos de la categoria seleccionada
-        $productos = "SELECT nombre from producto where ID_Cat = '$cat'";
+        $productos = "SELECT * from producto where ID_Cat = '$cat'";
 
         $result = $bd->query($productos);
+        if(!$result){
+            return false;
+        }
+
+        return $result;
+    }
+
+    function cargar_clientes(){
+        $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+        $bd = new PDO($res[0], $res[1], $res[2]);
+
+        $clientes = "select * from cliente";
+
+        $result = $bd->query($clientes);
+        if(!$result){
+            return false;
+        }
+
+        return $result;
+    }
+
+    function cargar_administradores(){
+        $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+        $bd = new PDO($res[0], $res[1], $res[2]);
+
+        $clientes = "select * from administrador";
+
+        $result = $bd->query($clientes);
         if(!$result){
             return false;
         }

@@ -26,7 +26,7 @@
 	    $bd = new PDO($res[0], $res[1], $res[2]);
 
         $user = "SELECT ID_Cliente, correo, contraseña FROM cliente";
-        $admin = "SELECT correo, contraseña FROM administrador";
+        $admin = "SELECT ID_Admin, correo, contraseña FROM administrador";
        
         $resul1 = $bd->query($admin);
         $resul = $bd->query($user);
@@ -46,6 +46,7 @@
              $arr [] = $fila['correo'];
              $arr [] = $fila['contraseña'];
              $arr [] = true;
+             $arr [] = $fila['ID_Admin'];
              $encontrado = true;
             }
          }
@@ -107,11 +108,11 @@
     }
 
     function cargar_productos($codigosProductos){
-        $res = leer_config(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+        $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
         $bd = new PDO($res[0], $res[1], $res[2]);
         $texto_in = implode(",", $codigosProductos);
         if($texto_in==NULL) return FALSE;
-        $ins = "select ID_Producto, nombre from producto where codProd in($texto_in)";
+        $ins = "select ID_Producto, nombre, precio from producto where ID_Producto in($texto_in)";
         $resul = $bd->query($ins);	
         if (!$resul) {
             return FALSE;
@@ -120,13 +121,19 @@
     }
 
     function insertar_pedido($carrito, $codCliente){
-        $res = leer_config(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+        $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
         $bd = new PDO($res[0], $res[1], $res[2]);
         $bd->beginTransaction();
-        $fechaRecibido  = date("d-m-Y");
-        $fechaEnviado =	date("d-m-Y", strtotime($fechaRecibido . "+5 days"));
+        $fechaRecibido = new DateTime(); // Fecha actual
+        $fechaRecibidoStr = $fechaRecibido->format('Y-m-d'); // Formatear a 'Y-m-d'
 
-        $insPedido = "  INSERT INTO pedido (Fecha_Recivido, Fecha_Enviado, Cliente) values ('$fechaRecibido', '$fechaEnviado','$codCliente' )";
+        $fechaEnviado = clone $fechaRecibido; // Crear una copia de la fecha actual
+        $fechaEnviado->modify('+5 days'); // Sumar 5 días
+
+        $fechaEnviadoStr = $fechaEnviado->format('Y-m-d'); // Formatear a 'Y-m-d'
+
+
+        $insPedido = "  INSERT INTO pedido (Fecha_Recibido, Fecha_Enviado, Cliente) values ('$fechaRecibidoStr', '$fechaEnviadoStr','$codCliente' )";
 
         $result = $bd ->query($insPedido);
         if (!$result) {
@@ -156,6 +163,34 @@
        return $idPedido;
 
     }
+
+    
+    function anadirStock($codAdmin, $codProducto, $unidades){
+        $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+        $bd = new PDO($res[0], $res[1], $res[2]);
+
+        //Insertar reabastecimiento en tabla reabastece
+        $insReabastece = "INSERT INTO reabastece(ID_Producto, ID_Admin, Unidades) VALUES ('$codProducto', '$codAdmin', '$unidades')";
+
+        $result = $bd->query($insReabastece);
+
+        if (!$result) {
+            return false;
+        }
+
+        //Actualizar stock de la tabla producto
+
+        $updStock = "UPDATE producto set stock = stock + '$unidades' WHERE ID_Producto = '$codProducto'";
+
+        $result = $bd->query($updStock);
+
+        if (!$result) {
+            return false;
+        }
+
+        return true;
+    }
+
 
     function comprobar_sesion(){
         session_start();

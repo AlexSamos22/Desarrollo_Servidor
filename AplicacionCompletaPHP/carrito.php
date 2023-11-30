@@ -20,14 +20,14 @@
 		}
 		echo "<h2>Carrito de la compra</h2>";
 		echo "<table>"; //abrir la tabla
-		echo "<tr><th>Nombre</th><th>Descripción</th><th>Peso</th><th>Unidades</th><th>Eliminar</th></tr>";
+		echo "<tr><th>Codigo</th><th>Nombre</th><th>Unidades</th><th>Eliminar</th></tr>";
 		foreach($productos as $producto){
 			$cod = $producto['ID_Producto'];
-			$nom = $producto['Nombre'];
+			$nom = $producto['nombre'];
 			$unidades = $_SESSION['carrito'][$cod];								
 			
 			//print_r($producto);				
-			echo "<tr><td>$nom</td><td>$des</td><td>$peso</td><td>$unidades</td>
+			echo "<tr><td>$cod</td><td>$nom</td><td>$unidades</td>
 			<td><form action = 'eliminar.php' method = 'POST'>
 			<input name = 'unidades' type='number' min = '1' value = '1'>
 			<input type = 'submit' value='Eliminar'>

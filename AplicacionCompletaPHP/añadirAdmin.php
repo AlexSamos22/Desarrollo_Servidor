@@ -20,9 +20,11 @@
             $result = $db->query($ins);
 
             if ($result) {
-                echo "Administrador añadido con exito";
+                echo "Administrador añadido con exito<br>";
+                echo "<a href='procesarAdmin.php'>Volver</a>";
             }else{
-                echo "Algo ha salido mal";
+                echo "Algo ha salido mal<br>";
+                echo "<a href='procesarAdmin.php'>Volver</a>";
             }
 
         } catch (PDOException $e) {

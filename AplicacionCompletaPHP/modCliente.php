@@ -32,9 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     $result = $db->query($upd);
 
                     if ($result) {
-                        echo "Actualizacion realizada con exito";
+                        echo "Actualizacion realizada con exito<br>";
+                        echo "<a href='procesarCliente.php'>Volver</a>";
                     }else{
-                        echo "No se puedo actualizar ha ocurrido un error";
+                        echo "No se puedo actualizar ha ocurrido un error<br>";
+                        echo "<a href='procesarCliente.php'>Volver</a>";
                     }
 
                     

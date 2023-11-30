@@ -16,9 +16,11 @@
             $result = $db->query($del);
 
             if ($result->rowCount() > 0) {
-                echo "Administrador eliminado con exito";
+                echo "Administrador eliminado con exito<br>";
+                echo "<a href='procesarAdmin.php'>Volver</a>";
             }else{
-                echo "Algo ha salido mal";
+                echo "Algo ha salido mal<br>";
+                echo "<a href='procesarAdmin.php'>Volver</a>";
             }
 
         } catch (PDOException $e) {

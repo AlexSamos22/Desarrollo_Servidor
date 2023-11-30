@@ -1,8 +1,7 @@
 <?php
 	/*comprueba que el usuario haya abierto sesión o redirige*/
 //	require 'correo.php';
-	require 'sesiones.php';
-	require_once 'bd.php';
+	require 'funciones.php';
 	comprobar_sesion();
 ?>	
 <!DOCTYPE html>
@@ -24,13 +23,13 @@
 		echo "<h1>Pedido nº $resul</h1>";
 		$productos = cargar_productos(array_keys($_SESSION['carrito']));
 		echo "<table>"; //abrir la tabla
-		echo "<tr><th>Nombre</th><th>Descripción</th><th>Peso</th><th>Unidades</th></tr>";
+		echo "<tr><th>Nombre</th><th>Unidades</th></tr>";
 		foreach ($productos as $producto) {
-			$cod=$producto['ID_Producto'];
-			$nom=$producto['Nombre'];	
+			$cod =$producto['ID_Producto'];
+			$nom =$producto['nombre'];	
 			$unidades=$_SESSION['carrito'][$cod];
-			$pesoTotal = $peso * $unidades;
-			echo "<tr><td>$nom</td><td>$des</td><td>$pesoTotal</td><td>$unidades</td>";
+			$precioTotal = $producto['precio'] * $unidades;
+			echo "<tr><td>$nom</td><td>$unidades</td><td>$precioTotal</td>";
 		}
 		echo "</table>";
 

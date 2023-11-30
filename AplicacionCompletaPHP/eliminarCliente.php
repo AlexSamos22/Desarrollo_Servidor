@@ -16,9 +16,11 @@
             $result = $db->query($del);
 
             if ($result->rowCount() > 0) {
-                echo "Cliente eliminado con exito";
+                echo "Cliente eliminado con exito<br>";
+                echo "<a href='procesarCliente.php'>Volver</a>";
             }else{
-                echo "Algo ha salido mal";
+                echo "Algo ha salido mal<br>";
+                echo "<a href='procesarCliente.php'>Volver</a>";
             }
 
         } catch (PDOException $e) {

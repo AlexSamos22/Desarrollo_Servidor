@@ -133,7 +133,7 @@
         $fechaEnviadoStr = $fechaEnviado->format('Y-m-d'); // Formatear a 'Y-m-d'
 
 
-        $insPedido = "  INSERT INTO pedido (Fecha_Recibido, Fecha_Enviado, Cliente) values ('$fechaRecibidoStr', '$fechaEnviadoStr','$codCliente' )";
+        $insPedido = " INSERT INTO pedido (Fecha_Recibido, Fecha_Enviado, Cliente) values ('$fechaRecibidoStr', '$fechaEnviadoStr','$codCliente' )";
 
         $result = $bd ->query($insPedido);
         if (!$result) {
@@ -191,6 +191,36 @@
         return true;
     }
 
+    function anadirProducto($nombre, $stock, $precio, $cat){
+        $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+        $bd = new PDO($res[0], $res[1], $res[2]);
+
+        //Insertar producto nuevo en la tabla
+        $insProducto = "INSERT INTO producto(Nombre, Stock, Precio, ID_Cat) VALUES ('$nombre', '$stock', '$precio', '$cat')";
+
+        $result = $bd->query($insProducto);
+
+        if (!$result) {
+            return false;
+        }
+
+        return true;
+    }
+
+    function eliminarProducto($cat){
+        $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+        $bd = new PDO($res[0], $res[1], $res[2]);
+
+        //Sacar productos de la categoria seleccionada
+        $productos = "SELECT nombre from producto where ID_Cat = '$cat'";
+
+        $result = $bd->query($productos);
+        if(!$result){
+            return false;
+        }
+
+        return $result;
+    }
 
     function comprobar_sesion(){
         session_start();

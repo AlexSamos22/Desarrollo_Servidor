@@ -55,5 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <input type="submit" value="Registrarse">
             <br>
         </form>
+        <a href="login.php">Volver al Login</a>
     </body>
 </html>

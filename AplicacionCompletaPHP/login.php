@@ -46,9 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <br>
         </form>
         <?php 
-        if (isset($err) and $err == true) {
-            echo "No existe la cuenta, pruebe a <a href='registro.php'>registrarse</a>";
-        }
+            echo "Si no tiene cuenta <a href='registro.php'>registrese</a>";
         ?>
     </body>
 </html>

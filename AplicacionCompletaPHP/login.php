@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $_SESSION['usuario'] = $usu;
         unset($_SESSION['admin']); // Eliminar la sesión de admin si existe
         $_SESSION['carrito'] = [];
-        header("Location: listaCategorias.php");
+        header("Location: inicioClientes.php");
         return;
     } else {
         session_start();
@@ -35,6 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <body>
         <?php if(isset($_GET["redirigido"])){
             echo "<p>Haga login para continuar</p>";
+        }?>
+        <?php if(isset($err) and $err = true){
+            echo "<p>Comprueba contraseña o correo</p>";
         }?>
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
             <label for="correo">Correo</label>

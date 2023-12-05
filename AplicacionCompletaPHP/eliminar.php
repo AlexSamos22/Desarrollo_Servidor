@@ -5,10 +5,10 @@ comprobar_sesion();
 $cod = $_POST['cod'];
 $unidades = $_POST['unidades'];
 
-if(isset($_SESSION['carrito'][3])){		
-	$_SESSION['carrito'][3] -= $unidades;
-	if($_SESSION['carrito'][3] <= 0){
-		unset($_SESSION['carrito'][3]);
+if(isset($_SESSION['carrito'][$cod])){		
+	$_SESSION['carrito'][$cod] -= $unidades;
+	if($_SESSION['carrito'][$cod] <= 0){
+		unset($_SESSION['carrito'][$cod]);
 	}
 	
 }

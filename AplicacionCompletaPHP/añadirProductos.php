@@ -40,9 +40,18 @@
             <input id="precio" name="precio" type="number" min="1">
             <label for="cat">Categoria</label>
             <select id="cat" name="cat">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                <?php
+                 $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+                 $bd = new PDO($res[0], $res[1], $res[2]);
+                 
+                 $id_Cat = "SELECT ID_Cat from categoria";
+
+                 $result = $bd->query($id_Cat);
+                 foreach ($result as $id) {
+                    $cat = $id['ID_Cat'];
+                    echo "<option value='$cat'>$cat</option>";
+                 }
+                ?>
             </select>
             <br>
             <input type="submit" value="Añadir Productos">

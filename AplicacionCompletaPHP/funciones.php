@@ -132,8 +132,7 @@
 
         $fechaEnviadoStr = $fechaEnviado->format('Y-m-d'); // Formatear a 'Y-m-d'
 
-
-        $insPedido = " INSERT INTO pedido (Fecha_Recibido, Fecha_Enviado, Cliente) values ('$fechaRecibidoStr', '$fechaEnviadoStr','$codCliente' )";
+        $insPedido = " INSERT INTO pedido (Fecha_Recibido, Fecha_Enviado, Cliente) values ('$fechaRecibidoStr', '$fechaEnviadoStr','$codCliente')";
 
         $result = $bd ->query($insPedido);
         if (!$result) {
@@ -143,8 +142,8 @@
         $idPedido = $bd->lastInsertId();
 
         foreach($carrito as $codProd=>$unidades){
-            $insIcnluye = "insert into incluye(ID_Pedido, ID_Producto) 
-                        values('$idPedido', '$codProd')";
+            $insIcnluye = "insert into incluye(ID_Pedido, ID_Producto, Unidades) 
+                        values('$idPedido', '$codProd', '$unidades')";
 
             $resul = $bd->query($insIcnluye);
        
@@ -248,6 +247,56 @@
         }
 
         return $result;
+    }
+
+    function add_Cat($nombre){
+        $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+        $bd = new PDO($res[0], $res[1], $res[2]);
+
+        $selectCat = "SELECT nombre FROM categoria";
+
+        $categorias = $bd->query($selectCat);
+
+        foreach ($categorias as $row) {
+            if (strtolower($nombre) == strtolower($row['nombre'])) {
+                return false;
+            }
+        }
+
+        $cat = "INSERT INTO categoria(nombre) values('$nombre')";
+
+        $result = $bd->query($cat);
+
+        if (!$result) {
+            return false;
+        }
+
+        return true;
+    }
+
+    function cargar_historial_pedidos($id_cliente){
+        $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+        $bd = new PDO($res[0], $res[1], $res[2]);
+
+        $select = "select c.ID_Cliente, i.*, po.Nombre 
+                    FROM cliente c
+                    JOIN pedido p ON c.ID_Cliente = p.Cliente
+                    JOIN incluye i ON p.ID_Pedido = i.ID_Pedido
+                    JOIN producto po ON po.ID_Producto = i.ID_Producto
+                    WHERE c.ID_Cliente = '$id_cliente';";
+
+        $pedidos = $bd->query($select);
+
+        if (!$pedidos) {
+            return false;
+        }
+
+        if ($pedidos->rowCount() == 0) {
+            return false;
+        }
+
+        return $pedidos;
+       
     }
 
     function comprobar_sesion(){

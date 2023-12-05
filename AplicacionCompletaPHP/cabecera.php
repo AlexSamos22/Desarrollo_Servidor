@@ -10,7 +10,7 @@
 
     <?php
         if (isset($_SESSION['usuario']) and $_SESSION['usuario'][2] == false) {
-            echo "<a href='listaCategorias.php'>Home</a>";
+            echo "<a href='inicioClientes.php'>Home</a>";
         }else{
             echo "<a href='panelControl.php'>Home</a>";
         }

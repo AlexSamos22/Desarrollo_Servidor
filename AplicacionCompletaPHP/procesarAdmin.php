@@ -13,7 +13,6 @@
     echo "<th>Nombre</th>";
     echo "<th>Apellidos</th>";
     echo "<th>Correo</th>";
-    echo "<th>Contraseña</th>";
     echo "</tr>";
 
     foreach ($admins as $row) {
@@ -22,7 +21,6 @@
         echo "<td>" . $row['Nombre'] . "</td>";
         echo "<td>" . $row['Apellidos'] . "</td>";
         echo "<td>" . $row['Correo'] . "</td>";
-        echo "<td>" . $row['contraseña'] . "</td>";
         echo "</tr>";
     }
 

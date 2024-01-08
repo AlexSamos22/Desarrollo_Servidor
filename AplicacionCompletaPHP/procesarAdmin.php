@@ -45,7 +45,7 @@
     } elseif ($accion == "eliminar") {
         echo "<h2>Eliminar administrador</h2>";
         echo "<form method='POST' action='eliminarAdmin.php'>";
-            echo "<label for='correo'>Correo del cliente</label>";
+            echo "<label for='correo'>Correo del administrador</label>";
             echo "<input type='text' id='correo' name='correo'>";
             echo "<br>";
             echo "<input type='submit' value='Eliminar'>";

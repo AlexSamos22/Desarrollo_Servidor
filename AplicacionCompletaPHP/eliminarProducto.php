@@ -32,7 +32,7 @@
 
        echo "<form method='POST' action='procesarEliminacionProducto.php'>";
         echo "<label for='cod'>Codigo del producto</label>";
-        echo "<input id='cod' name='cod' type='number'>";
+        echo "<input id='cod' name='cod' type='number' min='1'>";
         echo "<input type='submit' value='Eliminar'>";
     echo "</form>";
 

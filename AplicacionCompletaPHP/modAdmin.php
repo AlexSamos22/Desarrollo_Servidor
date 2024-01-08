@@ -33,10 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                     if ($result) {
                         echo "Actualizacion realizada con exito<br>";
-                        echo "<a href='procesarAdmin.php'>Volver</a>";
+                        echo "<a href='modUsuarios.php'>Volver</a>";
                     }else{
                         echo "No se puedo actualizar ha ocurrido un error<br>";
-                        echo "<a href='procesarAdmin.php'>Volver</a>";
+                        echo "<a href='modUsuarios.php'>Volver</a>";
                     }
                 }
             }

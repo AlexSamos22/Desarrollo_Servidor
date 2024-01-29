@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <script src="funciones2.js"></script>
+</head>
+<body>
+    <form onsubmit="return calcular();">
+        <label for="1">Primer Numero</label>
+        <input type="number" id="1">
+        <label for="2">Segundo Numero</label>
+        <input type="number" id="2">
+        <label for="3">Operacion</label>
+        <select id="op" name="operaciones">
+            <option value="suma">Sumar</option>
+            <option value="resta">Restar</option>
+            <option value="mul">Multiplicar</option>
+            <option value="div">Dividir</option>
+        </select>
+        <input type="submit" value="Sumar">
+    </form>
+    <section id="resultado"></section>
+</body>
+</html>

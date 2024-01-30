@@ -28,22 +28,6 @@
 
         <section id = "contenido"></section>
 
-        <section id="opcion_mod" style="display: none;">
-
-            <h1 id="titulo_mod">Modificar Usuario</h1>
-
-            <form onsubmit=" return modUsuarios();">
-                <label for="opcion">¿Que quieres modificar?</label>
-                <select id="opcion" name="opcion">
-                    <option value="admin">Administrador</option>
-                    <option value="cliente">Cliente</option>
-                </select>
-                <input type="submit" value="Enviar">
-                <br>
-            </form>
-            
-        </section>
-
     </section>	
 
 </body>

@@ -323,4 +323,33 @@
                 return false;
             }
     }
+
+    function mod_cliente($codigo, $nombre, $apellidos, $correo, $cont){
+        $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+
+        $db = new PDO($res[0], $res[1], $res[2]);
+
+        $comprobarExistencia = "SELECT ID_Cliente, nombre, apellidos, correo, contraseña FROM cliente where ID_Cliente = '$codigo'";
+        $existe = $db->query($comprobarExistencia);
+
+        foreach ($existe as $row) {
+            if ($nombre === $row['nombre'] and $apellidos === $row['apellidos'] and $correo === $row['correo'] and password_verify($cont, $row['contraseña'])) {
+
+            }else{
+                $contrasenaCifrada = password_hash($cont, PASSWORD_DEFAULT);
+                $upd = "UPDATE cliente set nombre = '$nombre', apellidos = '$apellidos', correo = '$correo', contraseña = '$contrasenaCifrada'  WHERE ID_Cliente = '$codigo'";
+
+                $result = $db->query($upd);
+
+                if ($result) {
+                    return true;
+                }else{
+                    return false;
+                }
+
+                
+            }
+        }
+
+    }
 ?>

@@ -331,42 +331,72 @@ function inicioAdmin() {
 			link_stock.setAttribute("onclick", "return cargarCategorias_add_stock()");
 			stock.appendChild(link_stock);
 
-			let mod_usu = document.createElement("button");
-			mod_usu.style="padding: 5px 10px; font-size: 14px; margin-right: 5px;";
-			let link_mod_usu = document.createElement("a");
-			link_mod_usu.textContent = cats[1];
-			link_mod_usu.setAttribute("onclick", "return mostrar_modUsuarios()");
-			mod_usu.appendChild(link_mod_usu);
+			let mod_cliente = document.createElement("button");
+			mod_cliente.style="padding: 5px 10px; font-size: 14px; margin-right: 5px;";
+			let link_mod_cliente = document.createElement("a");
+			link_mod_cliente.textContent = cats[1];
+			link_mod_cliente.setAttribute("onclick", "return mod_cliente()");
+			mod_cliente.appendChild(link_mod_cliente);
+
+			let del_cliente = document.createElement("button");
+			del_cliente.style="padding: 5px 10px; font-size: 14px; margin-right: 5px;";
+			let link_del_cliente = document.createElement("a");
+			link_del_cliente.textContent = cats[2];
+			link_del_cliente.setAttribute("onclick", "return del_cliente()");
+			del_cliente.appendChild(link_del_cliente);
+
+			let add_admin = document.createElement("button");
+			add_admin.style="padding: 5px 10px; font-size: 14px; margin-right: 5px;";
+			let link_add_admin = document.createElement("a");
+			link_add_admin.textContent = cats[3];
+			link_add_admin.setAttribute("onclick", "return add_admin()");
+			add_admin.appendChild(link_add_admin);
+
+			let mod_admin = document.createElement("button");
+			mod_admin.style="padding: 5px 10px; font-size: 14px; margin-right: 5px;";
+			let link_mod_admin = document.createElement("a");
+			link_mod_admin.textContent = cats[4];
+			link_mod_admin.setAttribute("onclick", "return mod_admin()");
+			mod_admin.appendChild(link_mod_admin);
+
+			let del_admin = document.createElement("button");
+			del_admin.style="padding: 5px 10px; font-size: 14px; margin-right: 5px;";
+			let link_del_admin = document.createElement("a");
+			link_del_admin.textContent = cats[5];
+			link_del_admin.setAttribute("onclick", "return del_admin()");
+			del_admin.appendChild(link_del_admin);
 
 			let add_prod = document.createElement("button");
 			add_prod.style="padding: 5px 10px; font-size: 14px; margin-right: 5px;";
 			let link_add_prod = document.createElement("a");
-			link_add_prod.textContent = cats[2];
+			link_add_prod.textContent = cats[6];
 			link_add_prod.setAttribute("onclick", "return cargarHistorialPedidos()");
 			add_prod.appendChild(link_add_prod);
 
 			let del_prod = document.createElement("button");
 			del_prod.style="padding: 5px 10px; font-size: 14px; margin-right: 5px;";
 			let link_del_prod = document.createElement("a");
-			link_del_prod.textContent = cats[3];
+			link_del_prod.textContent = cats[7];
 			link_del_prod.setAttribute("onclick", "return cargarHistorialPedidos()");
 			del_prod.appendChild(link_del_prod);
 
 			let add_cat = document.createElement("button");
 			add_cat.style="padding: 5px 10px; font-size: 14px; margin-right: 5px;";
 			let link_add_cat = document.createElement("a");
-			link_add_cat.textContent = cats[4];
+			link_add_cat.textContent = cats[8];
 			link_add_cat.setAttribute("onclick", "return cargarHistorialPedidos()");
 			add_cat.appendChild(link_add_cat);
 			
-			let otra_seccion = document.getElementById("opcion_mod");
-			otra_seccion.style.display="none";
 			let contenido = document.getElementById("contenido");
 			contenido.style.display="block";
 			contenido.innerHTML = "";	
 			contenido.appendChild(stock);
-			contenido.appendChild(mod_usu);
-			contenido.appendChild(add_prod);
+			contenido.appendChild(mod_cliente);
+			contenido.appendChild(del_cliente);
+			contenido.appendChild(add_admin);
+			contenido.appendChild(mod_admin);
+			contenido.appendChild(del_admin);
+			contenido.appendChild(add_prod)
 			contenido.appendChild(del_prod);
 			contenido.appendChild(add_cat);
 			let titulo = document.getElementById("titulo");
@@ -561,88 +591,153 @@ function crearTablaProductos_add_stock(productos){
 	}	
 	return tabla;		
 }
+function cargarClientes() {
+	let xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {	
+			let clientes = JSON.parse(this.responseText);
+			let tabla = document.createElement("table");
+			let cabecera = document.createElement("tr");
 
-function mostrar_modUsuarios(){
-	document.getElementById("principal").style.display= "block";
-	document.getElementById("login").style.display= "none";
-	document.getElementById("contenido").style.display="none";
-	document.getElementById("opcion_mod").style.display="block";
+			let cab_cod = document.createElement("th");
+			cab_cod.innerHTML = "Codigo";
+			cabecera.appendChild(cab_cod);	
+
+			let cab_nombre = document.createElement("th");
+			cab_nombre.innerHTML = "Nombre";
+			cabecera.appendChild(cab_nombre);	
+			
+			let cab_apellidos = document.createElement("th");
+			cab_apellidos.innerHTML = "Apellidos";
+			cabecera.appendChild(cab_apellidos);	
+
+			let cab_correo = document.createElement("th");
+			cab_correo.innerHTML = "Correo";
+			cabecera.appendChild(cab_correo);
+
+			tabla.appendChild(cabecera);
+
+			for (let i = 0; i < clientes.length; i++) {
+				let cuerpo = document.createElement("tr");
+
+				let cuerpo_cod = document.createElement("td");
+				cuerpo_cod.innerHTML = clientes[i]["ID_Cliente"];
+				cuerpo.appendChild(cuerpo_cod);
+
+				let cuerpo_nombre = document.createElement("td");
+				cuerpo_nombre.innerHTML = clientes[i]["Nombre"];
+				cuerpo.appendChild(cuerpo_nombre);
+
+				let cuerpo_apellidos = document.createElement("td");
+				cuerpo_apellidos.innerHTML = clientes[i]["Apellidos"];
+				cuerpo.appendChild(cuerpo_apellidos);
+
+				let cuerpo_correo = document.createElement("td");
+				cuerpo_correo.innerHTML = clientes[i]["Correo"];
+				cuerpo.appendChild(cuerpo_correo);
+				
+				tabla.appendChild(cuerpo);
+			};
+			let titulo = document.getElementById("titulo");
+			titulo.innerHTML ="Info clientes";
+			contenido.appendChild(tabla);	
+		}	
+	};
+	xhttp.open("GET", "clientes.php", true);
+	xhttp.send();
+	return false;	
 }
 
-function modUsuarios(){
-	let opcion = document.getElementById("opcion").value;
+function mod_cliente() {
+	
+	let contenido = document.getElementById("contenido");
+	contenido.innerHTML="";
+	cargarClientes();
 	let form = document.createElement("form");
-	let seccion = document.getElementById("opcion_mod");
-	if (opcion == "admin") {
-		let select = document.createElement("select");
-		select.id="opcion2";
 
-		let label = document.createElement("label");
-		label.htmlFor = "opcion2";
-		label.innerHTML = "Elija que hacer con el admin";
-		form.appendChild(label);
+	form.setAttribute("onsubmit", "return procesar_mod_cliente()");
 
-		let opcion1_admin = document.createElement("option");
-		opcion1_admin.value="Añadir";
-		opcion1_admin.innerHTML="Añadir"
+	let label_cod = document.createElement("label");
+	label_cod.htmlFor="codigo";
+	label_cod.innerHTML="Codigo";
+	form.appendChild(label_cod);
 
-		let opcion2_admin = document.createElement("option");
-		opcion2_admin.value="Eliminar";
-		opcion2_admin.innerHTML="Eliminar"
+	let input_cod = document.createElement("input");
+	input_cod.id="codigo";
+	input_cod.type="number";
+	form.appendChild(input_cod);
 
-		let opcion3_admin = document.createElement("option");
-		opcion3_admin.value="Modificar";
-		opcion3_admin.innerHTML = "Modificar"
+	let label_nom = document.createElement("label");
+	label_nom.htmlFor="nombre";
+	label_nom.innerHTML="Nombre";
+	form.appendChild(label_nom);
 
-		select.appendChild(opcion1_admin);
-		select.appendChild(opcion2_admin);
-		select.appendChild(opcion3_admin);
 
-		let submit = document.createElement("input");
-		submit.type= "submit"
-		submit.value="Enviar";
-		
-		form.appendChild(select);
-		form.appendChild(submit);
+	let input_nom = document.createElement("input");
+	input_nom.id="nombre";
+	input_nom.type="text";
+	form.appendChild(input_nom);
 
-		let titulo = document.createElement("h1");
-		titulo.innerHTML = "Elija una opcion para los Usuarios";
-		seccion.innerHTML = "";
-		seccion.appendChild(titulo);
-		seccion.appendChild(form);
-	}else{
-		let select = document.createElement("select");
-		select.id="opcion2";
+	
+	let label_ape = document.createElement("label");
+	label_ape.htmlFor="apellidos";
+	label_ape.innerHTML="Apellidos";
+	form.appendChild(label_ape);
 
-		let label = document.createElement("label");
-		label.htmlFor = "opcion2";
-		label.innerHTML = "Elija que hacer con el usuario";
-		form.appendChild(label);
+	let input_ape = document.createElement("input");
+	input_ape.id="apellidos";
+	input_ape.type="text";
+	form.appendChild(input_ape); 
 
-		let opcion1_usu = document.createElement("option");
-		opcion1_usu.value="Modificar";
-		opcion1_usu.innerHTML = "Modificar";
+	let label_corr = document.createElement("label");
+	label_corr.htmlFor="correo";
+	label_corr.innerHTML="Correo";
+	form.appendChild(label_corr);
 
-		let opcion2_usu = document.createElement("option");
-		opcion2_usu.value="Eliminar";
-		opcion2_usu.innerHTML = "Eliminar"
+	let input_corr = document.createElement("input");
+	input_corr.id="correo_mod";
+	input_corr.type="text";
+	form.appendChild(input_corr);
 
-		select.appendChild(opcion1_usu);
-		select.appendChild(opcion2_usu);
+	let label_cont = document.createElement("label");
+	label_cont.htmlFor="contraseña";
+	label_cont.innerHTML="Contraseña";
+	form.appendChild(label_cont);
 
-		let submit = document.createElement("input");
-		submit.type= "submit"
-		submit.value="Enviar";
-		
-		form.appendChild(select);
-		form.appendChild(submit);
+	let input_cont = document.createElement("input");
+	input_cont.id="contraseña";
+	input_cont.type="text";
+	form.appendChild(input_cont);
+	
+	let submit = document.createElement("input");
+	submit.type="submit";
+	submit.value="Enviar";
+	form.appendChild(submit);
 
-		let titulo = document.createElement("h1");
-		titulo.innerHTML = "Elija una opcion para los Usuarios";
-		seccion.innerHTML = "";
-		seccion.appendChild(titulo);
-		seccion.appendChild(form);
-	}
+	contenido.appendChild(form);
+}
 
+function procesar_mod_cliente() {
+	let codigo = document.getElementById("codigo").value;
+	let nombre = document.getElementById("nombre").value;
+	let apellidos = document.getElementById("apellidos").value;
+	let correo = document.getElementById("correo_mod").value;
+	let cont = document.getElementById("contraseña").value;
+	console.log(codigo);
+	var xhttp = new XMLHttpRequest();		
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			if (this.responseText == "TRUE") {
+				alert("Cliente modificado");
+				inicioAdmin();
+			}else{
+				alert("Hubo un error");
+				inicioAdmin();
+			}						
+	}};
+	var params = "codigo="+codigo+"&nombre="+nombre+"&apellidos="+apellidos+"&correo="+correo+"&cont="+cont;
+	xhttp.open("POST", "procesar_mod_cliente.php", true);	
+	xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhttp.send(params);	
 	return false;
 }

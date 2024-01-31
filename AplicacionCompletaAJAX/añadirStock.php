@@ -6,8 +6,8 @@ if (!comprobar_sesion()) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $codigoProducto = $_POST['cod'];
-    $unidades = $_POST['unidades'];
+    $codigoProducto = $_POST['codigo'];
+    $unidades = $_POST['stock'];
     $codigoAdmin = $_SESSION['admin'][3];
 
 

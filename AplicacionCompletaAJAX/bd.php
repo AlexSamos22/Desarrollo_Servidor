@@ -195,7 +195,7 @@
         $bd = new PDO($res[0], $res[1], $res[2]);
 
         //Insertar producto nuevo en la tabla
-        $insProducto = "INSERT INTO producto(Nombre, Stock, Precio, ID_Cat) VALUES ('$nombre', '$stock', '$precio', '$cat')";
+        $insProducto = "insert into producto(Nombre, Stock, Precio, ID_Cat) values ('$nombre', '$stock', '$precio', '$cat')";
 
         $result = $bd->query($insProducto);
 
@@ -253,17 +253,7 @@
         $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
         $bd = new PDO($res[0], $res[1], $res[2]);
 
-        $selectCat = "SELECT nombre FROM categoria";
-
-        $categorias = $bd->query($selectCat);
-
-        foreach ($categorias as $row) {
-            if (strtolower($nombre) == strtolower($row['nombre'])) {
-                return false;
-            }
-        }
-
-        $cat = "INSERT INTO categoria(nombre) values('$nombre')";
+        $cat = "insert into categoria(nombre) values('$nombre')";
 
         $result = $bd->query($cat);
 
@@ -334,7 +324,7 @@
 
         foreach ($existe as $row) {
             if ($nombre === $row['nombre'] and $apellidos === $row['apellidos'] and $correo === $row['correo'] and password_verify($cont, $row['contraseña'])) {
-
+                return false;
             }else{
                 $contrasenaCifrada = password_hash($cont, PASSWORD_DEFAULT);
                 $upd = "UPDATE cliente set nombre = '$nombre', apellidos = '$apellidos', correo = '$correo', contraseña = '$contrasenaCifrada'  WHERE ID_Cliente = '$codigo'";
@@ -345,11 +335,128 @@
                     return true;
                 }else{
                     return false;
-                }
-
-                
+                }       
             }
+        }
+    }
+
+    function mod_admin($codigo, $nombre, $apellidos, $correo, $cont){
+        $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+        $db = new PDO($res[0], $res[1], $res[2]);
+
+        $comprobarExistencia = "SELECT ID_Admin, nombre, apellidos, correo, contraseña FROM administrador where ID_Admin = '$codigo'";
+        $existe = $db->query($comprobarExistencia);
+
+        foreach ($existe as $row) {
+            if ($nombre === $row['nombre'] and $apellidos === $row['apellidos'] and $correo === $row['correo'] and password_verify($cont, $row['contraseña'])) {
+                return false;
+            }else{
+                $contrasenaCifrada = password_hash($cont, PASSWORD_DEFAULT);
+                $upd = "UPDATE administrador set nombre = '$nombre', apellidos = '$apellidos', correo = '$correo', contraseña = '$contrasenaCifrada'  WHERE ID_Admin = '$codigo'";
+
+                $result = $db->query($upd);
+
+                if ($result) {
+                    return true;
+                }else{
+                    return false;
+                }   
+            }
+        }
+    }
+
+    function del_cliente($correo){
+        $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+        $db = new PDO($res[0], $res[1], $res[2]);
+        $del = "DELETE FROM cliente where correo = '$correo'";
+
+        $result = $db->query($del);
+
+        if ($result->rowCount() > 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function del_admin($correo){
+        $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+        $db = new PDO($res[0], $res[1], $res[2]);
+        $del = "DELETE FROM administrador where correo = '$correo'";
+
+        $result = $db->query($del);
+
+        if ($result->rowCount() > 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function add_admin($nombre, $apellidos, $correo, $cont){
+        $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+        $db = new PDO($res[0], $res[1], $res[2]);
+        $contrasenaCifrada = password_hash($cont, PASSWORD_DEFAULT);
+
+        $ins = "INSERT INTO administrador(nombre, apellidos, correo, contraseña) values('$nombre', '$apellidos', '$correo', '$contrasenaCifrada')";
+
+        $result = $db->query($ins);
+
+        if ($result) {
+            return true;
+        }else{
+            return false;
         }
 
     }
+
+    function cargar_categorias_productos(){
+        $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+        $bd = new PDO($res[0], $res[1], $res[2]);
+        
+        $id_Cat = "SELECT ID_Cat from categoria";
+
+        $result = $bd->query($id_Cat);
+        return $result;
+    }
+
+    function cargar_info_productos(){
+        $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+        $bd = new PDO($res[0], $res[1], $res[2]);
+        
+        $ins = "select ID_Producto, nombre, stock from producto";
+        $resul = $bd->query($ins);	
+        if (!$resul) {
+            return FALSE;
+        }
+        return $resul;	
+    }
+
+    function del_prod($cod){
+        $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+        $bd = new PDO($res[0], $res[1], $res[2]);    
+        $eliminacion = "DELETE from producto where ID_Producto = '$cod'";
+    
+        $result = $bd->query($eliminacion);
+    
+        if ($result) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function cargar_nombres_cat(){
+        $res = configuracionBaseDatos(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+        $bd = new PDO($res[0], $res[1], $res[2]);
+        
+        $ins = "select nombre from categoria";
+        $resul = $bd->query($ins);	
+        if (!$resul) {
+            return FALSE;
+        }
+        return $resul;	
+    }
+
+
 ?>

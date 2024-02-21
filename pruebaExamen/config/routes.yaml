@@ -1,0 +1,67 @@
+idenx:
+    path: /ejemplo1
+    controller: App\Controller\Ejemplo1Controller::index
+
+mostrarTabla:
+    path: /mostrarTabla/{tabla}
+    controller: App\Controller\Ejemplo1Controller::mostrarTabla
+
+mult:
+    path: /mult/{num1}/{num2}
+    controller: App\Controller\Ejemplo1Controller::mult
+
+primos:
+    path: /primos/{limite}
+    controller: App\Controller\Ejemplo1Controller::primos
+
+defecto:
+    path: /defecto/{num1}
+    controller: App\Controller\Ejemplo1Controller::defecto
+
+cuadrado:
+    path: /cuadrado/{num}
+    controller: App\Controller\Ejemplo1Controller::cuadrado
+
+saludo:
+    path: /saludo/{nombre}
+    controller: App\Controller\Ejemplo1Controller::saludo
+
+condicional:
+    path: /condicional/{numero}
+    controller: App\Controller\Ejemplo1Controller::condicional
+
+tabla:
+    path: /tabla/{numero}
+    controller: App\Controller\Ejemplo1Controller::tabla
+
+getEmpleados:
+    path: /getEmpleados
+    controller: App\Controller\EmpleadosController::getEmpleados
+
+getEmpleado:
+    path: /getEmpleado/{id}
+    controller: App\Controller\EmpleadosController::getEmpleado
+
+setEmpleados:
+    path: /setEmpleados
+    controller: App\Controller\EmpleadosController::setEmpleados
+
+modEmpleados:
+    path: /modEmpleados/{id}
+    controller: App\Controller\EmpleadosController::modEmpleados
+
+getJugadores:
+    path: /getJugadores
+    controller: App\Controller\JugadoresController::getJugadores
+
+getJugador:
+    path: /getJugador/{id}
+    controller: App\Controller\JugadoresController::getJugador
+
+setJugadores:
+    path: /setJugadores
+    controller: App\Controller\JugadoresController::setJugadores
+
+modJugador:
+    path: /modJugador/{id}
+    controller: App\Controller\JugadoresController::modJugador

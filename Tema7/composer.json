@@ -1,0 +1,12 @@
+{
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true,
+            "symfony/runtime": true
+        }
+    },
+    "require": {
+        "symfony/orm-pack": "^2.4",
+        "doctrine/annotations": "^2.0"
+    }
+}

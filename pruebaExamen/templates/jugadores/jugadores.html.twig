@@ -1,0 +1,32 @@
+{% extends ("base.html.twig") %}
+{% block title %}Jugadores{% endblock %}
+{% block body %}
+
+    <h1>Listado de jugadores</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>nombre</th>
+                <th>apellido</th>
+                <th>edad</th>
+                <th>equipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for jugador in lista %}
+                <tr>
+                    <td>{{jugador.id}}</td>
+                    <td>{{jugador.nombre}}</td>
+                    <td>{{jugador.apellidos}}</td>
+                    <td>{{jugador.edad}}</td>
+                    <td>{{jugador.equipo}}</td>
+                    <td><a href="{{path('modJugador', {'id' : jugador.id}) }}">Modificar jugador</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{path('setJugadores')}}">Ir al registro de jugadores</a>
+
+{% endblock %}

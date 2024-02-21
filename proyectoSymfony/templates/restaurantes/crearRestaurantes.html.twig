@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registro del restaurante{% endblock %}
+
+{% block body %}
+    <h1>Registro</h1>
+    {{ form_start(formRest) }}
+        {{ form_row(formRest.correo) }}
+        {{ form_row(formRest.clave) }}
+        {{ form_row(formRest.pais) }}
+        {{ form_row(formRest.cp) }}
+        {{ form_row(formRest.ciudad) }}
+        {{ form_row(formRest.direccion) }}
+        {{ form_widget(formRest.submit) }}
+        <br>
+    {{ form_end(formRest) }}
+{% endblock %}

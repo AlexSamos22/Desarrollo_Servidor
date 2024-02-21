@@ -1,0 +1,12 @@
+{% extends ('base.html.twig') %}
+
+{% block title %}Numeros primos{% endblock %}
+
+{% block body %}
+    <h1>Numeros primos hasta {{limite}}</h1>
+    <ul>
+        {% for numero in primos %}
+            <li>{{numero}}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% include ("base.html.twig") %}
+{% block title %}Registro de jugadores{% endblock %}
+
+{% block body %}
+    <h1>Registro</h1>
+
+    {{form_start(formJugadores)}}
+        {{form_row(formJugadores.nombre)}}
+        {{form_row(formJugadores.apellidos)}}
+        {{form_row(formJugadores.edad)}}
+        {{form_row(formJugadores.equipo)}}
+        {{form_widget(formJugadores.submit)}}
+        <br>
+        <a href="{{path('getJugadores')}}">Mostrar Jugadores</a>
+    {{form_end(formJugadores)}}
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends ('base.html.twig') %}
+
+{%  block tittle %} Listado de restaurantes {% endblock %}
+
+{% block body %}
+    <h1>Listado de restaurantes</h1>
+    <table>
+        <thead> 
+        <tr>
+            <th> id </th>
+            <th> correo </th>
+            <th> clave </th>
+            <th> pais </th>
+            <th> cp </th>
+            <th> ciudad </th>
+            <th> direccion </th>
+            <th> rol </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for rest in restaurantes %}
+            <tr>
+                <td> {{ rest.id }}</td>
+                <td> {{ rest.correo }}</td>
+                <td> {{ rest.clave }}</td>
+                <td> {{ rest.pais }}</td>
+                <td> {{ rest.cp }}</td>
+                <td> {{ rest.ciudad }}</td>
+                <td> {{ rest.direccion }}</td>
+                <td> {{ rest.rol }}</td>
+
+                <td><a href="{{ path('eliminarRestaurantes', {'id' : rest.id}) }}">Borrar Restaurantes</a></td>
+                <td><a href="{{ path('modificarRestaurantes', {'id' : rest.id}) }}">Modificar Restaurantes</a></td>
+
+               </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('crearRestaurantes')}}">Ir a registro de Restaurantes</a>
+{% endblock %}

@@ -1,0 +1,3 @@
+Admin alex1@gmail.com contraseña: 1234
+Cliente antonio@gmail.com contraseña 123
+Las sesiones siguen dando el error de que no las pilla bien, pero lo demas de la aplicacion funciona

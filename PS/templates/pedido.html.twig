@@ -1,0 +1,32 @@
+{# templates/home.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}Confirmación de pedido{% endblock %}
+{% block contenido %}
+    {% if error == 1 %}
+       No hay productos en el carrito
+    {% elseif error == 2%}
+       Error de la base de datos al procesar el pedido, consulte con el administrador    
+	{% else %}
+		Pedido {{ id }} realizado con éxito
+      <table>
+      <thead>
+         <tr><td>Id</td><td>nombre</td><td>Descripción</td><td>Peso</td><td>Unidades</td></tr>
+ 
+ 
+       </thead>
+      <tbody>
+         {% for prod in productos %}
+            
+             <tr>
+                <td>{{ prod.id }}</td>
+                <td>{{ prod.nombre }}</td>
+                <td>{{ prod.descripcion }}</td>
+                <td>{{ prod.peso }}</td>
+                <td>{{ prod.unidades }}</td>
+             </tr>
+    
+         {% endfor %}
+    </tbody>
+     </table>
+	{% endif %}       
+{% endblock %}

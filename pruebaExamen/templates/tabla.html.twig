@@ -1,0 +1,12 @@
+{% extends ("base.html.twig") %}
+
+{% block title %}Tabla multiplicar del {{numero}}{% endblock %}
+
+{% block body %}
+    <h1>Tabla de multiplicar {{numero}}</h1>
+
+    {% for i in range(low=0, high=10, step=1) %}
+        {{i}} x {{numero}} = {{i * numero}}<br>
+    {% endfor %}
+
+{% endblock %}

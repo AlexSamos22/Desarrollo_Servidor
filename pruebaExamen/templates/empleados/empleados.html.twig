@@ -1,0 +1,30 @@
+{% extends ("base.html.twig") %}
+{% block title %}Empleados{% endblock %}
+{% block body %}
+
+    <h1>Listado de empleados</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>nombre</th>
+                <th>apellido</th>
+                <th>salario</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for empleado in lista %}
+                <tr>
+                    <td>{{empleado.id}}</td>
+                    <td>{{empleado.nombre}}</td>
+                    <td>{{empleado.apellido}}</td>
+                    <td>{{empleado.salario}}</td>
+                    <td><a href="{{path('modEmpleados', {'id' : empleado.id}) }}">Modificar empleado</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{path('setEmpleados')}}">Ir al registro de empleados</a>
+
+{% endblock %}

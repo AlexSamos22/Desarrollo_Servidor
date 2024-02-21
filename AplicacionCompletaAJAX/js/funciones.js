@@ -521,8 +521,7 @@ function cargarClientes() {
 
 				tabla.appendChild(cuerpo);
 			};
-			let titulo = document.getElementById("titulo");
-			titulo.innerHTML = "Info clientes";
+			let contenido = document.getElementById("contenido");
 			contenido.appendChild(tabla);
 		}
 	};
@@ -578,8 +577,7 @@ function cargarAdmins() {
 
 				tabla.appendChild(cuerpo);
 			};
-			let titulo = document.getElementById("titulo");
-			titulo.innerHTML = "Info Administradores";
+			let contenido = document.getElementById("contenido");
 			contenido.appendChild(tabla);
 		}
 	};
@@ -1086,8 +1084,7 @@ function infoProductos() {
 
 				tabla.appendChild(cuerpo);
 			};
-			let titulo = document.getElementById("titulo");
-			titulo.innerHTML = "Info Productos";
+			let contenido = document.getElementById("contenido");
 			contenido.appendChild(tabla);
 		}
 	};
@@ -1167,8 +1164,7 @@ function infoCats() {
 
 				tabla.appendChild(cuerpo);
 			};
-			let titulo = document.getElementById("titulo");
-			titulo.innerHTML = "Info Catategorias";
+			let contenido = document.getElementById("contenido");
 			contenido.appendChild(tabla);
 		}
 	};

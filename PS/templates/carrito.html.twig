@@ -1,0 +1,38 @@
+{# templates/carrito.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}Carrito de la compra{% endblock %}
+{% block body %}    
+<header>
+    {% block header %}
+        {{ include('cabecera.html.twig') }}
+        <hr>
+    {% endblock %}
+</header>
+
+
+		{% if productos is empty %}
+			<p> El carrito está vacío </p>
+		{% else %}
+			<table>
+					
+		
+			
+				<thead>
+					<tr><td>Nombre</td><td>Descripción</td><td>Stock</td><td>Peso</td><td>Unidades</td><td>Eliminar</td></tr>
+			
+			
+					</thead>
+				<tbody>
+				{% for  prod in productos %}
+					<tr><td>{{ prod.nombre }}</td><td>{{ prod.descripcion }}</td><td>{{ prod.stock }}</td><td>{{ prod.peso }}</td><td>{{  prod.unidades  }}</td>
+						<td><form action = {{path('eliminar')}} method = 'POST'>
+					<input name = 'unidades' type='number' min = '1' value = '1'>
+					<input type = 'submit' value='Eliminar'><input name = 'cod' type='hidden' value = {{ prod.codProd }}>
+					</form></td>
+					</tr>			
+				{% endfor %}
+			</table>
+			 <a href = {{ path('realizarPedido') }}>Realizar Pedido</a>
+		{% endif %}    
+	
+{% endblock %}

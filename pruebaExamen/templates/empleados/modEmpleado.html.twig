@@ -1,0 +1,16 @@
+{% include ("base.html.twig") %}
+{% block tittle %}Actualizar de empleados{% endblock %}
+
+{% block body %}
+    <h1>Actualizar empleado</h1>
+
+    {{form_start(formEmple)}}
+        {{form_row(formEmple.nombre)}}
+        {{form_row(formEmple.apellido)}}
+        {{form_row(formEmple.salario)}}
+        {{form_widget(formEmple.submit)}}
+        <br>
+        <a href="{{path('getEmpleados')}}">Mostrar empleados</a>
+    {{form_end(formEmple)}}
+
+{% endblock %}

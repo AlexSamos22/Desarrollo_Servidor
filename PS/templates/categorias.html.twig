@@ -1,0 +1,25 @@
+{# templates/categorias.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}Lista de categorías{% endblock %}
+{% block body %}   
+<header>
+    {% block header %}
+        {{ include('cabecera.html.twig') }}
+        <hr>
+    {% endblock %}
+</header>
+        <table>
+          
+            <tbody>
+                {% for cat in categorias %}
+                  
+                          <tr>
+                          
+                              <td> <h1> * <a href="{{ path('productos', {'id': cat.id}) }}">{{ cat.nombre }}</a> </h1></td>  
+                          </tr>
+                  
+                {% endfor %}
+           </tbody>
+      </table>
+     
+{% endblock %}

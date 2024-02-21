@@ -1,0 +1,30 @@
+{% extends ('base.html.twig') %}
+     {% block tittle %}
+          Listado de Usuarios
+     {% endblock %}
+
+    {% block body %} 
+          <h1>Listado de Uusuarios</h1>
+          <table>
+               <thead>
+                    <tr>
+                         <th> id </th>
+                         <th> email </th>
+                         <th> password </th>
+                    </tr>
+               </thead>
+               <tbody>
+                    {% for Usr in listUsr %}
+                         
+                              <tr>
+                                   <td> {{ Usr.id }}</td>
+                                   <td> {{ Usr.email }}</td>
+                                   <td> {{ Usr.password }}</td>
+                              </tr>
+                    {% endfor %}
+               </tbody>
+          </table>
+
+          <a href="{{ path('Registro')}}">Ir a registro de Usuarios</a>
+
+    {% endblock %}

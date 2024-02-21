@@ -1,0 +1,10 @@
+{% extends ('base.html.twig') %}
+
+{% block title %}Saber si un numero es positivo o negativo{% endblock %}
+{% block body %}
+    {% if numero > 0 %}
+        <h1>El numero es positivo</h1>
+    {% else %}
+        <h1>El numero es negativo o igual a 0</h1>
+    {% endif %}
+{% endblock %}

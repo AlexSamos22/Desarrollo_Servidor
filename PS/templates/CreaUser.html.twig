@@ -1,0 +1,17 @@
+{% extends ('base.html.twig') %}
+     {% block tittle %}
+          Registro de Usuarios
+     {% endblock %}
+
+    {% block body %} 
+ 
+          <h1>Registro de usuarios</h1>
+
+          {{ form_start(formUsr) }}
+               {{ form_row(formUsr.email) }}
+               {{ form_row(formUsr.password) }}
+ 
+               {{ form_widget(formUsr.submit) }}
+               </br>
+          {{ form_end(formUsr) }}
+    {% endblock %}

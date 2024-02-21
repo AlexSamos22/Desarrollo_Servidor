@@ -1,0 +1,52 @@
+index:
+    path: /ejemplo1
+    controller: App\Controller\Ejemplo1Controller::index
+
+producto:
+    path: /producto/{num1}/{num2}
+    controller: App\Controller\Ejemplo1Controller::producto
+
+defecto1:
+    path: /defecto1/{num}
+    controller: App\Controller\Ejemplo1Controller::defecto1
+    defaults: {num: 3}
+
+cuadrado:
+    path: /cuadrado/{num}
+    controller: App\Controller\Ejemplo1Controller::cuadrado
+
+saludo:
+    path: /saludo/{nombre}
+    controller: App\Controller\Ejemplo1Controller::saludo
+
+condicional:
+    path: /condicional/{numero}
+    controller: App\Controller\Ejemplo1Controller::condicional
+
+tabla:
+    path: /tabla/{numero}
+    controller: App\Controller\Ejemplo1Controller::tabla
+
+restaurantes:
+    path: /restaurantes
+    controller: App\Controller\RestaurantesController::getRestaurantes
+
+restaurante:
+    path: /restaurante/{id}
+    controller: App\Controller\RestaurantesController::buscaRestaurante
+
+restauranteCorreo:
+    path: /restauranteCorreo/{correo}
+    controller: App\Controller\RestaurantesController::buscaCorreo
+
+crearRestaurantes:
+    path: /crearRestaurantes
+    controller: App\Controller\RestaurantesController::crearRestaurantes
+
+eliminarRestaurantes:
+    path: /eliminarRestaurantes/{id}
+    controller: App\Controller\RestaurantesController::eliminarRestaurantes
+
+modificarRestaurantes:
+    path: /modificarRestaurantes/{id}
+    controller: App\Controller\RestaurantesController::modificarRestaurantes
